@@ -1,0 +1,77 @@
+package {{apiPackage}};
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.*;
+{{#importList}}
+import {{{import}}};
+{{/importList}}
+
+@RestController
+public class {{className}} {
+
+    @Autowired
+    private {{className}}Service {{className}}service;
+
+{{#infoList}}
+{{#hasGet}}
+    @GetMapping(value = "{{urlName}}")
+    public {{responseType}} {{operationId}}(
+    HttpServletRequest httpServletRequest
+    {{#pathList}},
+           @PathVariable {{type}} {{name}}
+    {{/pathList}}
+    {{#bodyList}},
+           @RequestBody {{requestType}} {{name}}
+    {{/bodyList}}
+    {{#queryList}},
+           @RequestParam {{type}} {{name}}
+    {{/queryList}}
+    ) {
+
+        return {{className}}service.{{operationId}}(
+        httpServletRequest
+        {{#path.get.parameters}},
+            {{name}}
+        {{/path.get.parameters}});
+
+    }
+ {{/hasGet}}
+ {{#hasPost}}
+    @PostMapping(value = "{{urlName}}")
+    public {{responseType}} {{path.post.operationId}}(HttpServletRequest httpServletRequest{{#path.post.parameters}}, @PathVariable {{type}} {{name}}{{/path.post.parameters}}) {
+        return {{className}}service.{{path.post.operationId}}(httpServletRequest{{#path.post.parameters}}, {{name}}{{/path.post.parameters}});
+    }
+ {{/hasPost}}
+ {{#hasPut}}
+    @PutMapping(value = "{{urlName}}")
+    public {{responseType}} {{operationId}}(
+
+    {{#inList}}
+           @PathVariable {{type}} {{name}}
+    {{/inList}}
+    {{#bodyList}}
+           @RequestBody {{type}} {{name}}
+    {{/bodyList}}
+    {{#queryList}}
+           @RequestParam {{type}} {{name}}
+    {{/queryList}}
+    ) {
+
+        return {{className}}service.{{operationId}}(
+        {{#path.put.parameters}}
+            {{name}}
+        {{/path.put.parameters}});
+
+    }
+ {{/hasPut}}
+ {{#hasDelete}}
+    @DeleteMapping(value = "{{urlName}}")
+    public {{responseType}} {{path.delete.operationId}}(HttpServletRequest httpServletRequest{{#path.delete.parameters}}, @PathVariable {{type}} {{name}}{{/path.delete.parameters}}) {
+        return {{className}}service.{{path.delete.operationId}}(httpServletRequest{{#path.delete.parameters}}, {{name}}{{/path.delete.parameters}});
+    }
+ {{/hasDelete}}
+{{/infoList}}
+}

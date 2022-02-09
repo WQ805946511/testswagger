@@ -1,0 +1,163 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server."
+  version: "1.0.0"
+  title: "Swagger Petstore"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/v2"
+schemes:
+  - "https"
+  - "http"
+# paths  rest接口相关信息
+paths:
+  /user/{username}:
+    #get 请求方式 post put...
+    get:
+      tags:
+        - "UserController"
+      summary: "Get user by user name"
+      description: ""
+      #operationId：接口方法名
+      operationId: "getUserByName"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "username"
+          #in：path路径传参（占位符传参） body消息体传参  query问号传参 ...
+          in: "path"
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          # schema $ref 自定义模型（非基础数据类型）
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+  /user/{username}/11:
+    #get 请求方式 post put...
+    post:
+      tags:
+        - "UserController"
+      summary: "Get user by user name"
+      description: ""
+      #operationId：接口方法名
+      operationId: "getUserByName02"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "username"
+          #in：path路径传参（占位符传参） body消息体传参  query问号传参 ...
+          in: "path"
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          # schema $ref 自定义模型（非基础数据类型）
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+  /user/get:
+    #get 请求方式 post put...
+    get:
+      tags:
+        - "UserController"
+      summary: "Get user by user name"
+      description: ""
+      #operationId：接口方法名
+      operationId: "get"
+      produces:
+        - "application/xml"
+        - "application/json"
+#      parameters:
+#        - name: "username"
+#          #in：path路径传参（占位符传参） body消息体传参  query问号传参 ...
+#          in: "path"
+#          description: "The name that needs to be fetched. Use user1 for testing. "
+#          required: true
+#          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          # schema $ref 自定义模型（非基础数据类型）
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+  /test/{username}:
+    #get 请求方式 post put...
+    get:
+      tags:
+        - "TestController"
+      summary: "test"
+      description: ""
+      #operationId：接口方法名
+      operationId: "test"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "username"
+          #in：path路径传参（占位符传参） body消息体传参  query问号传参 ...
+          in: "path"
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: string
+            #自定义模型（非基础数据类型）
+#            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "not found"
+
+#definitions 前后台模型相关信息
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        #int64  Long   int32 Integer
+        format: int64
+      petId:
+        type: integer
+        format: int64
+      quantity:
+        type: integer
+        format: int32
+      shipDate:
+        type: string
+        format: date-time
+#      status:
+#        type: string
+#        description: Order Status
+#        enum:
+#          - placed
+#          - approved
+#          - delivered
+      complete:
+        type: boolean

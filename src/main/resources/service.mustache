@@ -1,0 +1,15 @@
+package {{servicePackage}};
+import javax.servlet.http.HttpServletRequest;
+{{#importList}}
+import {{{import}}};
+{{/importList}}
+
+public interface {{className}}Service
+{
+     //逻辑均在子类中实现
+{{#infoList}}
+{{#hasGet}}
+    {{responseType}} {{path.get.operationId}}(HttpServletRequest request{{#path.get.parameters}}, {{type}} {{name}}{{/path.get.parameters}});
+ {{/hasGet}}
+{{/infoList}}
+}

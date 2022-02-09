@@ -1,0 +1,54 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server Petstore server."
+  version: "1.0.0"
+  title: "Swagger Petstore"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "127.0.0.1:6080"
+basePath: "/"
+schemes:
+  - "https"
+  - "http"
+# paths  rest接口相关信息
+paths:
+  /user/{userName}:
+    #get 请求方式 post put...
+    post:
+      tags:
+        - "UserController"
+      summary: ""
+      description: ""
+      operationId: "getUserByName"
+      produces:
+        - "application/json"
+      parameters:
+        - name: userName
+          #in：path路径传参（占位符传参） body消息体传参  query问号传参 ...
+          in: path
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: string
+        - name: userName2
+          #in：path路径传参（占位符传参） body消息体传参  query问号传参 ...
+          in: query
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          type: string
+        - name: userName3
+          #in：path路径传参（占位符传参） body消息体传参  query问号传参 ...
+          in: body
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "successful operation"
+          # schema $ref 自定义模型（非基础数据类型）
+          schema:
+            type: string
